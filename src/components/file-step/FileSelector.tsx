@@ -21,7 +21,11 @@ export const FileSelector: React.FC<{ onSelected: (file: File) => void }> = ({
   }, []);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    onDrop: dropHandler
+    onDrop: dropHandler,
+    accept: 'text/csv',
+    onDropRejected: () => {
+      alert('Please use CSV file format');
+    }
   });
 
   const l10n = useLocale('fileStep');
