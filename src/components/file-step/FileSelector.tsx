@@ -23,8 +23,19 @@ export const FileSelector: React.FC<{ onSelected: (file: File) => void }> = ({
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop: dropHandler,
     accept: 'text/csv',
-    onDropRejected: () => {
-      alert('Please use CSV file format');
+    maxSize: 5242880,
+    onDropRejected: (error) => {
+      switch (error[0].errors[0].code) {
+        case 'file-invalid-type':
+          alert('Please use a CSV file');
+          break;
+        case 'file-too-large':
+          alert('File is too large please use a filesize of maximim 5MB');
+          break;
+        default:
+          alert('Please use a CSV file');
+          break;
+      }
     }
   });
 
