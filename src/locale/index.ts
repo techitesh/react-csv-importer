@@ -65,8 +65,7 @@ export const enUS: ImporterLocale = {
   },
 
   fileStep: {
-    initialDragDropPrompt:
-      'Drag-and-drop CSV file here, or click to select in folder',
+    initialDragDropPrompt: 'Only CSV files can be uploaded here',
     activeDragDropPrompt: 'Drop CSV file here...',
 
     getImportError: (message) => `Import error: ${message}`,
