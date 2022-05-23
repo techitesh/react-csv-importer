@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useCallback, useRef } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { useLocale } from '../../locale/LocaleContext';
+import Papa from 'papaparse';
 
 import './FileSelector.scss';
 
@@ -15,6 +17,51 @@ export const FileSelector: React.FC<{ onSelected: (file: File) => void }> = ({
     if (acceptedFiles.length < 1) {
       return;
     }
+    const fieldsToMatch: Array<string> = [
+      'exhibitorId',
+      'showId',
+      'uploadTime',
+      'note',
+      'organizationName',
+      'address1',
+      'address2',
+      'city',
+      'state',
+      'country',
+      'postalCode',
+      'contactFirstName',
+      'contactLastName',
+      'contactTitle',
+      'phone',
+      'extension',
+      'fax',
+      'email',
+      'boothType',
+      'boothNumber',
+      'boothWidth',
+      'boothDepth',
+      'idSign',
+      'ssoid',
+      'targetDate',
+      'userLogin',
+      'isFirstTimeExhibitor',
+      'cellPhone',
+      'recordStatus',
+      'boothScenarioId',
+      'recordTypeId'
+    ];
+    Papa.parse(acceptedFiles[0], {
+      header: true,
+      complete: (results: any) => {
+        const containsAll = fieldsToMatch.every((element) => {
+          return results?.meta?.fields.includes(element);
+        });
+        !containsAll &&
+          alert(
+            'The File you are uploading is a non-standard file format and as a result you will need to map your columns to our standard format'
+          );
+      }
+    });
 
     const file = acceptedFiles[0];
     onSelectedRef.current(file);

@@ -1,6 +1,6 @@
 {
-  "name": "react-csv-importer",
-  "version": "0.7.1",
+  "name": "freeman-react-csv-importer",
+  "version": "1.0.4",
   "description": "React CSV import widget with user-customizable mapping",
   "keywords": [
     "react",
@@ -16,7 +16,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/beamworks/react-csv-importer"
+    "url": "git+https://github.com/techitesh/react-csv-importer.git"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -109,5 +109,12 @@
     "papaparse": "^5.3.0",
     "react-dropzone": "^11.0.3",
     "react-use-gesture": "^7.0.16"
+  },
+  "bugs": {
+    "url": "https://github.com/beamworks/react-csv-importer/issues"
+  },
+  "homepage": "https://github.com/beamworks/react-csv-importer#readme",
+  "directories": {
+    "test": "test"
   }
 }
