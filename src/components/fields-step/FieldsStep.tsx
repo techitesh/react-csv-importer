@@ -13,7 +13,7 @@ import { ColumnDragObject } from './ColumnDragObject';
 import { ColumnDragSourceArea } from './ColumnDragSourceArea';
 import { ColumnDragTargetArea, FieldTouchedMap } from './ColumnDragTargetArea';
 import { useLocale } from '../../locale/LocaleContext';
-
+import './FieldsStep.scss';
 // re-export from a central spot
 export type Field = DragField;
 
@@ -34,10 +34,9 @@ export const FieldsStep: React.FC<{
 
   const columns = useMemo<Column[]>(
     () =>
-      generatePreviewColumns(
-        fileState.firstRows,
-        fileState.hasHeaders
-      ).map((item) => ({ ...item, code: generateColumnCode(item.index) })),
+      generatePreviewColumns(fileState.firstRows, fileState.hasHeaders).map(
+        (item) => ({ ...item, code: generateColumnCode(item.index) })
+      ),
     [fileState]
   );
 
@@ -151,29 +150,31 @@ export const FieldsStep: React.FC<{
       }}
       nextLabel={l10n.nextButton}
     >
-      <ColumnDragSourceArea
-        columns={columns}
-        fieldAssignments={fieldAssignments}
-        dragState={dragState}
-        eventBinder={dragEventBinder}
-        onSelect={columnSelectHandler}
-        onUnassign={unassignHandler}
-      />
+      <div className="csv-data">
+        <ColumnDragSourceArea
+          columns={columns}
+          fieldAssignments={fieldAssignments}
+          dragState={dragState}
+          eventBinder={dragEventBinder}
+          onSelect={columnSelectHandler}
+          onUnassign={unassignHandler}
+        />
 
-      <ColumnDragTargetArea
-        hasHeaders={fileState.hasHeaders}
-        fields={fields}
-        columns={columns}
-        fieldTouched={fieldTouched}
-        fieldAssignments={fieldAssignments}
-        dragState={dragState}
-        eventBinder={dragEventBinder}
-        onHover={dragHoverHandler}
-        onAssign={assignHandler}
-        onUnassign={unassignHandler}
-      />
+        <ColumnDragTargetArea
+          hasHeaders={fileState.hasHeaders}
+          fields={fields}
+          columns={columns}
+          fieldTouched={fieldTouched}
+          fieldAssignments={fieldAssignments}
+          dragState={dragState}
+          eventBinder={dragEventBinder}
+          onHover={dragHoverHandler}
+          onAssign={assignHandler}
+          onUnassign={unassignHandler}
+        />
 
-      <ColumnDragObject dragState={dragState} />
+        <ColumnDragObject dragState={dragState} />
+      </div>
     </ImporterFrame>
   );
 };

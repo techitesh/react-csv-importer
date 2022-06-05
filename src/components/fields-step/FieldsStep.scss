@@ -1,0 +1,31 @@
+.csv-data {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    .CSVImporter_ColumnDragSourceArea {
+        width: 20%;
+        flex-direction: column;
+        .CSVImporter_ColumnDragSourceArea__page {
+            flex-direction: column;
+            .CSVImporter_ColumnDragSourceArea__box {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+            .CSVImporter_ColumnDragSourceArea__box:last-child {
+                margin-bottom: 0;
+            }
+        }
+        .CSVImporter_ColumnDragSourceArea__control {
+            justify-content: center;
+            margin: 20px 0;
+        }
+    }
+    .CSVImporter_ColumnDragTargetArea {
+        width: 80%;
+        .CSVImporter_ColumnDragTargetArea__box {
+            width: 314px;
+        }
+    }
+  
+}
