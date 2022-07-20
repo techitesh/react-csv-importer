@@ -3,6 +3,7 @@ import React, { useCallback, useRef } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { useLocale } from '../../locale/LocaleContext';
 import Papa from 'papaparse';
+import { columnHeader } from './ColumnHeaderTemplate';
 
 import './FileSelector.scss';
 
@@ -17,39 +18,7 @@ export const FileSelector: React.FC<{ onSelected: (file: File) => void }> = ({
     if (acceptedFiles.length < 1) {
       return;
     }
-    const fieldsToMatch: Array<string> = [
-      'exhibitorId',
-      'showId',
-      'uploadTime',
-      'note',
-      'organizationName',
-      'address1',
-      'address2',
-      'city',
-      'state',
-      'country',
-      'postalCode',
-      'contactFirstName',
-      'contactLastName',
-      'contactTitle',
-      'phone',
-      'extension',
-      'fax',
-      'email',
-      'boothType',
-      'boothNumber',
-      'boothWidth',
-      'boothDepth',
-      'idSign',
-      'ssoid',
-      'targetDate',
-      'userLogin',
-      'isFirstTimeExhibitor',
-      'cellPhone',
-      'recordStatus',
-      'boothScenarioId',
-      'recordTypeId'
-    ];
+    const fieldsToMatch: Array<string> = columnHeader;
     Papa.parse(acceptedFiles[0], {
       header: true,
       complete: (results: any) => {
