@@ -21,6 +21,7 @@ export const FileSelector: React.FC<{ onSelected: (file: File) => void }> = ({
     const fieldsToMatch: Array<string> = columnHeader;
     Papa.parse(acceptedFiles[0], {
       header: true,
+      skipEmptyLines: 'greedy',
       complete: (results: any) => {
         const containsAll = fieldsToMatch.every((element) => {
           return results?.meta?.fields.includes(element);
