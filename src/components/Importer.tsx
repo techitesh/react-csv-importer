@@ -96,6 +96,7 @@ export function Importer<Row extends BaseRow>({
 
   const [fieldsState, setFieldsState] = useState<FieldsStepState | null>(null);
   const [fieldsAccepted, setFieldsAccepted] = useState<boolean>(false);
+  const [isParseError, setIsParseError] = useState<boolean>(false);
 
   // reset field assignments when file changes
   const activeFile = fileState && fileState.file;
@@ -153,6 +154,7 @@ export function Importer<Row extends BaseRow>({
             onAccept={() => {
               setFileAccepted(true);
             }}
+            onParse={(isParseErr) => setIsParseError(isParseErr)}
           />
 
           {contentWrap}
@@ -169,6 +171,7 @@ export function Importer<Row extends BaseRow>({
             fileState={fileState}
             fields={fields}
             prevState={fieldsState}
+            isParseError={isParseError}
             onChange={(state) => {
               setFieldsState(state);
             }}

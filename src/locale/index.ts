@@ -13,6 +13,7 @@ export interface ImporterLocale {
     getDataFormatError: (message: string) => string;
     goBackButton: string;
     nextButton: string;
+    nextButtonColumnMatched: string;
 
     rawFileContentsHeading: string;
     previewImportHeading: string;
@@ -72,6 +73,7 @@ export const enUS: ImporterLocale = {
     getDataFormatError: (message) => `Please check data formatting: ${message}`,
     goBackButton: 'Go Back',
     nextButton: 'Choose columns',
+    nextButtonColumnMatched: 'Import',
 
     rawFileContentsHeading: 'Raw File Contents',
     previewImportHeading: 'Preview Import',

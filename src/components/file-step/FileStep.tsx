@@ -26,7 +26,8 @@ export const FileStep: React.FC<{
   prevState: FileStepState | null;
   onChange: (state: FileStepState | null) => void;
   onAccept: () => void;
-}> = ({ customConfig, assumeNoHeaders, prevState, onChange, onAccept }) => {
+  onParse: (isParseError:boolean) => void;
+}> = ({ customConfig, assumeNoHeaders, prevState, onChange, onAccept, onParse }) => {
   // seed from previous state as needed
   const [selectedFile, setSelectedFile] = useState<File | null>(
     prevState ? prevState.file : null
@@ -48,6 +49,8 @@ export const FileStep: React.FC<{
     prevState ? prevState.hasHeaders : false
   );
 
+  const [isColumnMatched, setIsColumnMatched] = useState<boolean>(false);
+
   // wrap in ref to avoid triggering effect
   const customConfigRef = useRef(customConfig);
   customConfigRef.current = customConfig;
@@ -55,6 +58,8 @@ export const FileStep: React.FC<{
   assumeNoHeadersRef.current = assumeNoHeaders;
   const onChangeRef = useRef(onChange);
   onChangeRef.current = onChange;
+  const onParseRef = useRef(onParse);
+  onParseRef.current = onParse;
 
   // notify of current state
   useEffect(() => {
@@ -65,6 +70,10 @@ export const FileStep: React.FC<{
     );
   }, [preview, papaParseConfig, hasHeaders]);
 
+  const onParseCallback = (isParseErr:boolean) => {
+      setIsColumnMatched(!isParseErr);
+      onParseRef.current(isParseErr);
+  };
   // perform async preview parse once for the given file
   const asyncLockRef = useRef<number>(0);
   useEffect(() => {
@@ -80,6 +89,7 @@ export const FileStep: React.FC<{
     }
 
     const oplock = asyncLockRef.current;
+
 
     // lock in the current PapaParse config instance for use in multiple spots
     const config = customConfigRef.current;
@@ -170,7 +180,7 @@ export const FileStep: React.FC<{
   }, [preview, hasHeaders, l10n]);
 
   if (!selectedFile) {
-    return <FileSelector onSelected={(file) => setSelectedFile(file)} />;
+    return <FileSelector onSelected={(file) => setSelectedFile(file)} onParse={(isParseError) => onParseCallback(isParseError)}/>;
   }
 
   return (
@@ -185,7 +195,7 @@ export const FileStep: React.FC<{
         onAccept();
       }}
       onCancel={() => setSelectedFile(null)}
-      nextLabel={l10n.nextButton}
+      nextLabel={isColumnMatched? l10n.nextButtonColumnMatched:l10n.nextButton}
     >
       {reportBlock || (
         <div className="CSVImporter_FileStep__mainPendingBlock">

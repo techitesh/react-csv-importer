@@ -7,11 +7,14 @@ import { columnHeader } from './ColumnHeaderTemplate';
 
 import './FileSelector.scss';
 
-export const FileSelector: React.FC<{ onSelected: (file: File) => void }> = ({
-  onSelected
+export const FileSelector: React.FC<{ onSelected: (file: File) => void, onParse:(isParseError:boolean) => void }> = ({
+  onSelected,
+  onParse
 }) => {
   const onSelectedRef = useRef(onSelected);
   onSelectedRef.current = onSelected;
+  const onParseRef = useRef(onParse);
+  onParseRef.current = onParse;
 
   const dropHandler = useCallback((acceptedFiles: File[]) => {
     // silently ignore if nothing to do
@@ -30,11 +33,14 @@ export const FileSelector: React.FC<{ onSelected: (file: File) => void }> = ({
           alert(
             'The File you are uploading is a non-standard file format and as a result you will need to map your columns to our standard format'
           );
+        const file = acceptedFiles[0];
+        onSelectedRef.current(file);
+        onParseRef.current(!containsAll);
       }
     });
 
-    const file = acceptedFiles[0];
-    onSelectedRef.current(file);
+    // const file = acceptedFiles[0];
+    // onSelectedRef.current(file);
   }, []);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({

@@ -25,10 +25,11 @@ export const FieldsStep: React.FC<{
   fileState: FileStepState;
   fields: Field[];
   prevState: FieldsStepState | null;
+  isParseError: boolean;
   onChange: (state: FieldsStepState) => void;
   onAccept: () => void;
   onCancel: () => void;
-}> = ({ fileState, fields, prevState, onChange, onAccept, onCancel }) => {
+}> = ({ fileState, fields, prevState, isParseError, onChange, onAccept, onCancel }) => {
   const onChangeRef = useRef(onChange);
   onChangeRef.current = onChange;
 
@@ -122,6 +123,10 @@ export const FieldsStep: React.FC<{
 
   const l10n = useLocale('fieldsStep');
 
+  if(!isParseError)
+  {
+    onAccept();
+  }
   return (
     <ImporterFrame
       fileName={fileState.file.name}
