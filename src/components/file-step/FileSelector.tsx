@@ -26,16 +26,21 @@ export const FileSelector: React.FC<{ onSelected: (file: File) => void, onParse:
       header: true,
       skipEmptyLines: 'greedy',
       complete: (results: any) => {
-        const containsAll = fieldsToMatch.every((element) => {
-          return results?.meta?.fields.includes(element);
-        });
-        !containsAll &&
-          alert(
-            'The File you are uploading is a non-standard file format and as a result you will need to map your columns to our standard format'
-          );
-        const file = acceptedFiles[0];
-        onSelectedRef.current(file);
-        onParseRef.current(!containsAll);
+        if(results.data.length > 0){
+          const containsAll = fieldsToMatch.every((element) => {
+            return results?.meta?.fields.includes(element);
+          });
+          !containsAll &&
+            alert(
+              'The File you are uploading is a non-standard file format and as a result you will need to map your columns to our standard format'
+            );
+          const file = acceptedFiles[0];
+          onSelectedRef.current(file);
+          onParseRef.current(!containsAll);
+        }else{
+          alert('The exhibitor list file uploaded has no exhibitor content.  Please review the file or upload a new file with exhibitor details.');
+          return;
+        }
       }
     });
 
