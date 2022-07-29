@@ -1,6 +1,6 @@
 {
   "name": "freeman-react-csv-importer",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "React CSV import widget with user-customizable mapping",
   "keywords": [
     "react",
