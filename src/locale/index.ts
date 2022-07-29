@@ -130,6 +130,7 @@ export const deDE: ImporterLocale = {
       'CSV-Datei auf dieses Feld ziehen, oder klicken um eine Datei auszuwählen',
     activeDragDropPrompt: 'CSV-Datei auf dieses Feld ziehen...',
     nextButton: 'Spalten auswählen',
+    nextButtonColumnMatched: 'importieren',
 
     getImportError: (message) => `Fehler beim Import: ${message}`,
     getDataFormatError: (message: string) =>
