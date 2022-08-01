@@ -42,7 +42,7 @@ export function useColumnDragState(
   onTouchedRef.current = onTouched;
 
   const [dragState, setDragState] = useState<DragState | null>(null);
-  const [scrollPos, setScrollPos] = useState({clientX:0, clientY:0, scrollX:0, scrollY:0});
+  const [scrollPos, setScrollPos] = useState({clientY:0, scrollY:0});
 
   const [fieldAssignments, setFieldAssignments] = useState<FieldAssignmentMap>(
     initialAssignments
