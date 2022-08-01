@@ -42,6 +42,7 @@ export function useColumnDragState(
   onTouchedRef.current = onTouched;
 
   const [dragState, setDragState] = useState<DragState | null>(null);
+  const [scrollPos, setScrollPos] = useState({clientX:0, clientY:0, scrollX:0, scrollY:0});
 
   const [fieldAssignments, setFieldAssignments] = useState<FieldAssignmentMap>(
     initialAssignments
@@ -97,6 +98,21 @@ export function useColumnDragState(
   );
 
   const bindDrag = useDrag(({ first, last, event, xy, args }) => {
+    if(first)
+    {
+      setScrollPos({clientY:event.clientY, scrollY:0});
+    }else{
+      const {clientY, scrollY} = scrollPos;
+      const dy = scrollY + event.clientY - clientY;
+
+    // Scroll the element
+    window.scrollBy({
+      top:dy,
+      left:0,
+      behavior:'smooth'
+    })
+    setScrollPos({clientY:event.clientY, scrollY:dy});
+    }
     if (first && event) {
       // only prevent default inside first event
       // (touchmove uses passive event handler and would trigger warning)

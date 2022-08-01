@@ -19,6 +19,31 @@ export const Main: Story<SampleImporterProps> = (args: SampleImporterProps) => {
     <Importer {...args}>
       <ImporterField name="fieldA" label="Field A" />
       <ImporterField name="fieldB" label="Field B" optional />
+      <ImporterField name="fieldC" label="Field C" />
+      <ImporterField name="fieldD" label="Field D" optional />
+      <ImporterField name="fieldE" label="Field E" />
+      <ImporterField name="fieldF" label="Field F" optional />
+      <ImporterField name="fieldG" label="Field G" />
+      <ImporterField name="fieldH" label="Field H" optional />
+      <ImporterField name="fieldI" label="Field I" />
+      <ImporterField name="fieldJ" label="Field J" optional />
+      <ImporterField name="fieldK" label="Field K" />
+      <ImporterField name="fieldL" label="Field L" optional />
+      <ImporterField name="fieldM" label="Field M" />
+      <ImporterField name="fieldN" label="Field N" optional />
+      <ImporterField name="fieldO" label="Field O" />
+      <ImporterField name="fieldP" label="Field P" optional />
+      <ImporterField name="fieldQ" label="Field Q" />
+      <ImporterField name="fieldR" label="Field R" optional />
+      <ImporterField name="fieldS" label="Field S" />
+      <ImporterField name="fieldT" label="Field T" optional />
+      <ImporterField name="fieldU" label="Field U" />
+      <ImporterField name="fieldV" label="Field V" optional />
+      <ImporterField name="fieldW" label="Field W" />
+      <ImporterField name="fieldX" label="Field X" optional />
+      <ImporterField name="fieldY" label="Field Y" />
+      <ImporterField name="fieldZ" label="Field Z" optional />
+
     </Importer>
   );
 };
