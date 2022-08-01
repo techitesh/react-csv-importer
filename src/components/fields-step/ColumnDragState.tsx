@@ -98,12 +98,12 @@ export function useColumnDragState(
   );
 
   const bindDrag = useDrag(({ first, last, event, xy, args }) => {
-    if(first)
+    if(first && event)
     {
-      setScrollPos({clientY:event.clientY, scrollY:0});
+      setScrollPos({clientY:xy[1], scrollY:0});
     }else{
       const {clientY, scrollY} = scrollPos;
-      const dy = scrollY + event.clientY - clientY;
+      const dy = scrollY + xy[1] - clientY;
 
     // Scroll the element
     window.scrollBy({
@@ -111,7 +111,7 @@ export function useColumnDragState(
       left:0,
       behavior:'smooth'
     })
-    setScrollPos({clientY:event.clientY, scrollY:dy});
+    setScrollPos({clientY:xy[1], scrollY:dy});
     }
     if (first && event) {
       // only prevent default inside first event
