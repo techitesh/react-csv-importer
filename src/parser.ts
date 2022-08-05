@@ -236,6 +236,7 @@ export function parsePreview(
 
     Papa.parse(nodeStream, {
       ...customConfig,
+      skipEmptyLines: 'greedy',
 
       chunkSize: 10000, // not configurable, preview only @todo make configurable
       preview: PREVIEW_ROW_COUNT,
@@ -311,6 +312,7 @@ export function processFile<Row extends BaseRow>(
 
     Papa.parse(nodeStream, {
       ...papaParseConfig,
+      skipEmptyLines: 'greedy',
       chunkSize: papaParseConfig.chunkSize || 10000, // our own preferred default
 
       error: (error) => {
